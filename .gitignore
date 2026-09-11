@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+target/
+*.class
+.idea/
+.vscode/
+.DS_Store
+raw_data/*.csv
