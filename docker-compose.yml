@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  # Runs the trained GAT+GRU model and writes predictions.csv into the
+  # shared volume. One-shot batch job, not a long-running server.
+  predictor:
+    build:
+      context: .
+      dockerfile: docker/predictor.Dockerfile
+    volumes:
+      - ./processed_data:/app/processed_data
+    # Requires processed_data/gat_gru_model.pt to already exist on the host
+    # (i.e. you've run src/train_model.py locally first) -- training itself
+    # isn't containerized, only inference/export is.
+
+  # Reads predictions.csv and prints alerts. Waits for predictor to finish
+  # successfully before starting (needs Docker Compose v2.20+ for this
+  # condition -- check with `docker compose version`).
+  alerting:
+    build:
+      context: ./alerting
+      dockerfile: Dockerfile
+    volumes:
+      - ./processed_data:/data
+    depends_on:
+      predictor:
+        condition: service_completed_successfully
