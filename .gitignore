@@ -9,3 +9,5 @@ target/
 .vscode/
 .DS_Store
 raw_data/*.csv
+node_modules/
+frontend/dist/
