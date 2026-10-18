@@ -16,8 +16,8 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
 PROJECT_ROOT = os.environ.get("PROJECT_ROOT", os.path.join(os.path.dirname(__file__), ".."))
-PREDICTIONS_PATH = os.path.join(PROJECT_ROOT, "processed_data", "predictions.csv")
-NODES_PATH = os.path.join(PROJECT_ROOT, "processed_data", "station_nodes.csv")
+PREDICTIONS_PATH = os.path.join(os.path.dirname(__file__), "data", "predictions.csv")
+NODES_PATH = os.path.join(os.path.dirname(__file__), "data", "station_nodes.csv")
 
 DEFAULT_START = "2023-11-01T00:00:00"
 DROPOUT_THRESHOLD_HOURS = 4

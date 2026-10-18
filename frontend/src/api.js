@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const BACKEND_HTTP = "http://localhost:8000";
-const BACKEND_WS = "ws://localhost:8000";
+const BACKEND_HTTP = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const BACKEND_WS = BACKEND_HTTP.replace(/^http/, "ws");
 
 export function useStations() {
   const [stations, setStations] = useState([]);
